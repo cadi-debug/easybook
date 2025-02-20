@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block title %}Confirmation de réservation{% endblock %}
+
+{% block content %}
+<h1>Réservation confirmée</h1>
+
+<p><strong>Votre billet est prêt !</strong></p>
+
+<div style="border: 1px solid #ddd; padding: 20px; border-radius: 10px; width: 500px; margin: 0 auto; background-color: #f9f9f9;">
+    <h2>Détails du vol</h2>
+    <p><strong>Numéro du vol :</strong> {{ flight.flight_number }}</p>
+    <p><strong>Compagnie aérienne :</strong> {{ flight.airline }}</p>
+    <p><strong>Ville de départ :</strong> {{ flight.departure_city }}</p>
+    <p><strong>Ville d'arrivée :</strong> {{ flight.arrival_city }}</p>
+    <p><strong>Heure de départ :</strong> {{ flight.departure_time }}</p>
+    <p><strong>Heure d'arrivée :</strong> {{ flight.arrival_time }}</p>
+
+    <h2>Détails de la réservation</h2>
+    <p><strong>Réservation ID :</strong> {{ reservation.id }}</p>
+    <p><strong>Nombre de passagers :</strong> {{ passengers }}</p>
+    <p><strong>Utilisateur :</strong> {{ reservation.user.username }}</p>
+
+    <h2>Votre QR Code</h2>
+    {% if reservation.qr_code %}
+        <img src="{{ reservation.qr_code.url }}" alt="QR Code" style="width: 200px; height: 200px;">
+    {% else %}
+        <p>Aucun QR Code disponible.</p>
+    {% endif %}
+</div>
+<a href="{% url 'fly:download_ticket' reservation.id %}">Télécharger votre billet</a>
+<a href="{% url 'fly:search_flights' %}" class="btn btn-primary" style="margin-top: 20px;">Retour à la recherche</a>
+{% endblock %}

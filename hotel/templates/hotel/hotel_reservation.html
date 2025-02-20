@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+
+{% block title %} Hotel Reservation {% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <h1 class="text-center mb-5">Hotel Reservation</h1>
+
+    {% if messages %}
+        <div class="mb-4">
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <!-- Formulaire de réservation -->
+    <div class="card mb-4">
+        <div class="card-body">
+            <h2 class="card-title">Réserver une chambre</h2>
+            <form method="post">
+                {% csrf_token %}
+                {{ reservation_form.as_p }}
+                {% for error in reservation_form.non_field_errors %}
+                    <div class="alert alert-danger">{{ error }}</div>
+                {% endfor %}
+                <button type="submit" name="reserve" class="btn btn-primary">Réserver</button>
+            </form>
+
+        </div>
+    </div>
+
+    <!-- Bouton pour ouvrir la popup -->
+    <div class="text-center mb-4">
+        <button id="openRatingPopup" class="btn btn-secondary">Noter votre expérience</button>
+    </div>
+
+    <!-- Popup -->
+    <div id="ratingPopup" class="modal" tabindex="-1" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Noter votre expérience</h5>
+                    <button type="button" class="btn-close" id="closeRatingPopup" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="post">
+                        {% csrf_token %}
+                        {{ rating_form.as_p }}
+                        {% for error in rating_form.non_field_errors %}
+                            <div class="alert alert-danger">{{ error }}</div>
+                        {% endfor %}
+                        <button type="submit" name="rate" class="btn btn-secondary">Envoyer</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Gestion de la popup
+    const openPopupButton = document.getElementById("openRatingPopup");
+    const closePopupButton = document.getElementById("closeRatingPopup");
+    const ratingPopup = document.getElementById("ratingPopup");
+
+    // Ouvrir la popup
+    openPopupButton.addEventListener("click", function () {
+        ratingPopup.style.display = "block";
+    });
+
+    // Fermer la popup
+    closePopupButton.addEventListener("click", function () {
+        ratingPopup.style.display = "none";
+    });
+
+    // Fermer la popup si l'utilisateur clique en dehors du contenu
+    window.addEventListener("click", function (event) {
+        if (event.target === ratingPopup) {
+            ratingPopup.style.display = "none";
+        }
+    });
+</script>
+{% endblock %}

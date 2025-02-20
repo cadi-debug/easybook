@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Billet d'avion</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+            border: 1px solid #ddd;
+        }
+        h1, h2, h3 {
+            text-align: center;
+        }
+        .ticket-container {
+            border: 2px dashed #000;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .details {
+            margin: 10px 0;
+        }
+        .qr-code {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .footer {
+            margin-top: 30px;
+            text-align: center;
+            font-size: 12px;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <div class="ticket-container">
+        <h1>Votre Billet d'Avion</h1>
+        <h2>{{ flight.airline.name }}</h2>
+        <h3>Numéro du vol : {{ flight.flight_number }}</h3>
+
+        <div class="details">
+            <p><strong>Départ :</strong> {{ flight.departure_city }} à {{ flight.departure_time }}</p>
+            <p><strong>Arrivée :</strong> {{ flight.arrival_city }} à {{ flight.arrival_time }}</p>
+            <p><strong>Passagers :</strong> {{ passengers }}</p>
+            <p><strong>Réservation ID :</strong> {{ reservation.id }}</p>
+            <p><strong>Utilisateur :</strong> {{ reservation.user.username }}</p>
+        </div>
+
+        <div class="qr-code">
+            <h3>QR Code</h3>
+            {% if reservation.qr_code %}
+                <img src="{{ reservation.qr_code.url }}" alt="QR Code" style="width: 150px; height: 150px;">
+            {% else %}
+                <p>Aucun QR Code disponible.</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>Merci d'avoir choisi {{ flight.airline.name }} !</p>
+    </div>
+</body>
+</html>

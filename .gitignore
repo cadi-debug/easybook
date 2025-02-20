@@ -1,0 +1,10 @@
+recyclage.txt
+__pycache__/
+
+db.sqlite3
+.env
+
+*.pyc
+*.pyo
+
+staticfiles/

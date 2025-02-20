@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+{% block title %} About Us {% endblock %}
+{% load static %}
+{% block content %}
+
+<style>
+        .team-photo {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="{% url 'accounts:home' %}">Easy book</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">À Propos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'contact:contact' %}">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header Section -->
+    <header class="bg-primary text-white text-center py-5">
+        <div class="container">
+            <h1>À Propos de Nous</h1>
+            <p class="lead">Nous facilitons vos réservations en toute simplicité et sécurité.</p>
+        </div>
+    </header>
+
+    <!-- About Section -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 mb-4">
+                    <h2>Notre Mission</h2>
+                    <p>
+                        Chez BookingApp, nous nous engageons à offrir la meilleure expérience de réservation en ligne.
+                        Notre objectif est de rendre vos voyages plus faciles et plus agréables en vous permettant de réserver
+                        vos billets d'avion en quelques clics.
+                        Le lorem ipsum est, en imprimerie, une suite de mots sans signification utilisée à titre provisoire
+                        pour calibrer une mise en page, le texte définitif venant remplacer le faux-texte dès qu'il est prêt
+                        ou que la mise en page est achevée. Généralement, on utilise un texte en faux latin, le Lorem ipsum ou Lipsum.
+                        Chez BookingApp, nous nous engageons à offrir la meilleure expérience de réservation en ligne.
+                        Notre objectif est de rendre vos voyages plus faciles et plus agréables en vous permettant de réserver
+                        vos billets d'avion en quelques clics.
+                        Le lorem ipsum est, en imprimerie, une suite de mots sans signification utilisée à titre provisoire
+                        pour calibrer une mise en page, le texte définitif venant remplacer le faux-texte dès qu'il est prêt
+                        ou que la mise en page est achevée. Généralement, on utilise un texte en faux latin, le Lorem ipsum ou Lipsum.
+                        Le lorem ipsum est, en imprimerie, une suite de mots sans signification utilisée à titre provisoire
+                        pour calibrer une mise en page, le texte définitif venant remplacer le faux-texte dès qu'il est prêt
+                        ou que la mise en page est achevée. Généralement, on utilise un texte en faux latin, le Lorem ipsum ou Lipsum.
+                    </p>
+                    </p>
+                </div>
+                <div class="col-lg-6 mb-4">
+                    <img src="{% static 'img/team/mission.webp' %}" alt="Notre Mission" class="img-fluid rounded">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="bg-light py-5">
+        <div class="container">
+            <div class="text-center mb-4">
+                <h2>Notre Équipe</h2>
+                <p>Rencontrez les talents derrière BookingApp</p>
+            </div>
+            <div class="row">
+                <div class="col-md-4 text-center">
+                    <img src="{% static 'img/team/manager.webp' %}" alt="Membre 1" class="team-photo mb-3">
+                    <h5>Jean Dupont</h5>
+                    <p>CEO & Fondateur</p>
+                </div>
+                <div class="col-md-4 text-center">
+                    <img src="{% static 'img/team/marketing.webp' %}" alt="Membre 2" class="team-photo mb-3">
+                    <h5>Marie Leblanc</h5>
+                    <p>Responsable Marketing</p>
+                </div>
+                <div class="col-md-4 text-center">
+                    <img src="{% static 'img/team/dev.webp' %}" alt="Membre 3" class="team-photo mb-3">
+                    <h5>Cady Kambaji</h5>
+                    <p>Lead Développeur</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white text-center py-3">
+        <div class="container">
+            <p>&copy; 2025 Easybook. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+
+{% endblock %}

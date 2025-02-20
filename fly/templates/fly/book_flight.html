@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %} Flight reservation {% endblock %}
+
+{% block content %}
+<h1>Reserve a book</h1>
+
+<h2>Vol : {{ flight.airline.name }} - {{ flight.flight_number }}</h2>
+<p>De : {{ flight.departure_airport }}</p>
+<p>À : {{ flight.arrival_airport }}</p>
+<p>Class : {{ flight.flight_class }}</p>
+<p>Price : {{ flight.price }} $</p>
+<p>Places available : {{ available_seats }}</p>
+
+{% if error %}
+    <p style="color: red;">{{ error }}</p>
+{% endif %}
+
+<form method="post">
+    {% csrf_token %}
+    <label for="passengers">Nombre de passagers :</label>
+    <input type="number" id="passengers" name="passengers" min="1" max="{{ available_seats }}" required>
+    <button type="submit">Réserver</button>
+</form>
+
+{% endblock %}

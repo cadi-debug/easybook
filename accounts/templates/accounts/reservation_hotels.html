@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block title %}Profile - My Reservations{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4">My Reservations</h2>
+    {% if reservations %}
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Hotel</th>
+                        <th>Room</th>
+                        <th>Check-in Date</th>
+                        <th>Check-out Date</th>
+                        <th>Number of People</th>
+                        <th>Total Price</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for reservation in reservations %}
+                        <tr>
+                            <td>{{ reservation.hotel.name }}</td>
+                            <td>{{ reservation.room.name }}</td>
+                            <td>{{ reservation.check_in_date }}</td>
+                            <td>{{ reservation.check_out_date }}</td>
+                            <td>{{ reservation.number_of_people }}</td>
+                            <td>${{ reservation.total_price }}</td>
+                            <td>
+                                <span class="badge {% if reservation.status == 'Cancelled' %}badge-danger{% elif reservation.status == 'Pending' %}badge-warning{% else %}badge-success{% endif %}">
+                                    {{ reservation.status }}
+                                </span>
+                            </td>
+                            <td>
+                                {% if reservation.status != "Cancelled" %}
+                                    <form action="{% url 'accounts:cancel_reservation' reservation.id %}" method="post" class="d-inline">
+                                        {% csrf_token %}
+                                        <button type="submit" class="btn btn-sm btn-danger">Cancel</button>
+                                    </form>
+                                {% endif %}
+                                {% if reservation.status == "Pending" %}
+                                    <form action="{% url 'accounts:get_paid' reservation.id %}" method="post" class="d-inline">
+                                        {% csrf_token %}
+                                        <button type="submit" class="btn btn-sm btn-success">Pay</button>
+                                    </form>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+        <div class="alert alert-info">You have no reservations.</div>
+    {% endif %}
+</div>
+{% endblock %}

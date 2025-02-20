@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block title %}Hotel List{% endblock %}
+
+{% block content %}
+
+<div class="container mt-4">
+    <h2 class="text-center mb-5">Most Popular Hotels</h2>
+    <div class="row">
+        {% for hotel in exclusive_hotels %}
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-sm">
+                    <img src="{{ hotel.get_first_image }}" alt="Hotel Image" class="card-img-top" style="height: 200px; object-fit: cover;">
+                    <div class="card-body">
+                        <h3 class="card-title">{{ hotel.name }}</h3>
+                        <p class="card-text">
+                            <strong>Address:</strong> {{ hotel.address }}<br>
+                            <strong>City:</strong> {{ hotel.city }}<br>
+                            <strong>Phone:</strong> {{ hotel.phone }}<br>
+                            <strong>Email:</strong> {{ hotel.email }}<br>
+                            <strong>Rating:</strong> {{ hotel.average_rating }} ⭐
+                        </p>
+                        <a href="{% url 'hotel:detail' hotel.id %}" class="btn btn-primary btn-block">Reserve</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}
